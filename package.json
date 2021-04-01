@@ -10,16 +10,27 @@
 		"Other"
 	],
 	"activationEvents": [
-		"onCommand:cppgenerator.helloWorld"
+		"onView:cppgenerator"
 	],
 	"main": "./dist/extension.js",
 	"contributes": {
-		"commands": [
-			{
-				"command": "cppgenerator.helloWorld",
-				"title": "Hello World"
-			}
-		]
+		"viewsContainers": {
+			"activitybar": [
+				{
+					"id": "fogg-module",
+					"title": "Fogg Module",
+					"icon": "resources/dep.svg"
+				}
+			]
+		},
+		"views": {
+			"fogg-module": [
+				{
+					"id": "cppgenerator",
+					"name": "CPP Generator"
+				}
+			]
+		}
 	},
 	"scripts": {
 		"vscode:prepublish": "npm run package",
