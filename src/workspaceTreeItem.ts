@@ -17,6 +17,7 @@ export class TreeItem extends vscode.TreeItem {
         this.type = type;
         this.path = path;
         this.cppFile = cppFile;
+        this.contextValue = type;
     }
 
     setChildrens(children: (TreeItem|undefined)[]) {

@@ -4,14 +4,17 @@ import * as path from 'path';
 import {TreeItem} from './workspaceTreeItem';
 
 export class TreeDataProvider implements vscode.TreeDataProvider<TreeItem> {
-    onDidChangeTreeData?: vscode.Event<TreeItem|null|undefined>|undefined;
+    onDidChangeTreeData?: vscode.Event<any|null|undefined>|undefined;
   
     data: TreeItem[];
+    private _onDidChangeTreeData: vscode.EventEmitter<unknown>;
   
     constructor(private workspaceRoot: string | undefined) {
+
+        this._onDidChangeTreeData = new vscode.EventEmitter();
+        this.onDidChangeTreeData = this._onDidChangeTreeData.event;
         if(this.workspaceRoot) {
             this.data = this.getFilesData(this.workspaceRoot);
-            let toto = "0";
         } else {
             this.data = [];
         }
@@ -35,6 +38,14 @@ export class TreeDataProvider implements vscode.TreeDataProvider<TreeItem> {
         const tree = dirTree(folderName);
         return  tree ? [tree] : [];
     }
+    refresh() {
+        if(this.workspaceRoot) {
+            this.data = this.getFilesData(this.workspaceRoot);
+        } else {
+            this.data = [];
+        }
+        this._onDidChangeTreeData.fire(null);
+      }
 }
 
 function dirTree(filename: string ) { 

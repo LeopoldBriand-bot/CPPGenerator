@@ -2,10 +2,24 @@
 // Import the module and reference it with the alias vscode in your code below
 import * as vscode from 'vscode';
 import {TreeDataProvider} from './workSpaceTreeDataProvider';
+import {addFolder} from './actions/addFolder.action';
+
 // this method is called when your extension is activated
 // your extension is activated the very first time the command is executed
 export function activate(context: vscode.ExtensionContext) {
-	vscode.window.registerTreeDataProvider('cppgenerator', new TreeDataProvider(vscode.workspace.rootPath));
+	const treeDataProvider =  new TreeDataProvider(vscode.workspace.rootPath);
+	vscode.window.registerTreeDataProvider('cppgenerator', treeDataProvider);
+	// Register Add sub-folder Command.
+    vscode.commands.registerCommand(
+		'cppgenerator.addFolder',
+		async (context) => {
+		  try {
+			await addFolder(context, treeDataProvider);
+		  } catch (err) {
+			vscode.window.showErrorMessage(err);
+		  }
+		},
+	  );
 }
 
 // this method is called when your extension is deactivated

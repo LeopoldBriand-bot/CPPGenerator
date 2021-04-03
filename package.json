@@ -17,17 +17,41 @@
 		"viewsContainers": {
 			"activitybar": [
 				{
-					"id": "fogg-module",
-					"title": "Fogg Module",
+					"id": "cppgenerator",
+					"title": "CPP Module",
 					"icon": "resources/dep.svg"
 				}
 			]
 		},
 		"views": {
-			"fogg-module": [
+			"cppgenerator": [
 				{
 					"id": "cppgenerator",
 					"name": "CPP Generator"
+				}
+			]
+		},
+		"commands": [
+			{
+				"command": "cppgenerator.addFolder",
+				"title": "Create folder",
+				"icon": {
+					"light": "resources/icons/light/new_folder.svg",
+					"dark": "resources/icons/dark/new_folder.svg"
+				}
+			}
+		],
+		"menus": {
+			"view/item/context": [
+				{
+					"command": "cppgenerator.addFolder",
+					"when": "view == cppgenerator && viewItem == folder"
+				}
+			],
+			"view/title": [
+				{
+					"command": "cppgenerator.addFolder",
+					"when": "view == cppgenerator && config.cppgenerator.workspaceStorageDirectory != ''"
 				}
 			]
 		}
