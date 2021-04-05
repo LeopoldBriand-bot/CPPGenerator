@@ -1,4 +1,5 @@
 import * as vscode from 'vscode';
+import * as path from 'path';
 
 export class TreeItem extends vscode.TreeItem {
     children: TreeItem[] | undefined;
@@ -17,12 +18,26 @@ export class TreeItem extends vscode.TreeItem {
         this.type = type;
         this.path = path;
         this.cppFile = cppFile;
+        this.iconPath = this.getIcon();
         this.contextValue = type;
     }
 
     setChildrens(children: (TreeItem|undefined)[]) {
         const filteredArray: TreeItem[] = children ? children.filter(notEmpty) : [];
         this.children = filteredArray;
+    }
+    getIcon() {
+        if (this.type === "folder") {
+            return {
+                light: path.join(__filename, '..', '..', 'resources', 'icons', 'light', 'folder.svg'),
+                dark: path.join(__filename, '..', '..', 'resources', 'icons', 'dark', 'folder.svg'),
+            };
+        } else {
+            return {
+                light: path.join(__filename, '..', '..', 'resources', 'icons', 'light', 'document.svg'),
+                dark: path.join(__filename, '..', '..', 'resources', 'icons', 'dark', 'document.svg'),
+            };
+        }
     }
 }
 

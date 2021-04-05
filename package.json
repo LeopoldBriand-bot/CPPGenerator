@@ -33,11 +33,11 @@
 		},
 		"commands": [
 			{
-				"command": "cppgenerator.refreshEntry",
+				"command": "cppgenerator.refresh",
 				"title": "Refresh",
 				"icon": {
-					"light": "resources/light/refresh.svg",
-					"dark": "resources/dark/refresh.svg"
+					"light": "resources/icons/light/refresh.svg",
+					"dark": "resources/icons/dark/refresh.svg"
 				}
 			},
 			{
