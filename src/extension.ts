@@ -3,12 +3,21 @@
 import * as vscode from 'vscode';
 import {TreeDataProvider} from './workSpaceTreeDataProvider';
 import {addFolder} from './actions/addFolder.action';
+import { deleteFolder } from './actions/deleteFolder.action';
 
 // this method is called when your extension is activated
 // your extension is activated the very first time the command is executed
 export function activate(context: vscode.ExtensionContext) {
 	const treeDataProvider =  new TreeDataProvider(vscode.workspace.rootPath);
 	vscode.window.registerTreeDataProvider('cppgenerator', treeDataProvider);
+	vscode.commands.registerCommand(
+		'cppgenerator.refresh', 
+		async () => {
+			treeDataProvider.refresh();
+		}
+	);
+	
+
 	// Register Add sub-folder Command.
     vscode.commands.registerCommand(
 		'cppgenerator.addFolder',
@@ -20,6 +29,16 @@ export function activate(context: vscode.ExtensionContext) {
 		  }
 		},
 	  );
+	vscode.commands.registerCommand(
+		'cppgenerator.deleteFolder',
+		async (context) => {
+			try {
+			await deleteFolder(context, treeDataProvider);
+			} catch (err) {
+			vscode.window.showErrorMessage(err);
+			}
+		},
+	);
 }
 
 // this method is called when your extension is deactivated

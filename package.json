@@ -33,12 +33,24 @@
 		},
 		"commands": [
 			{
+				"command": "cppgenerator.refreshEntry",
+				"title": "Refresh",
+				"icon": {
+					"light": "resources/light/refresh.svg",
+					"dark": "resources/dark/refresh.svg"
+				}
+			},
+			{
 				"command": "cppgenerator.addFolder",
 				"title": "Create folder",
 				"icon": {
 					"light": "resources/icons/light/new_folder.svg",
 					"dark": "resources/icons/dark/new_folder.svg"
 				}
+			},
+			{
+				"command": "cppgenerator.deleteFolder",
+				"title": "Delete folder"
 			}
 		],
 		"menus": {
@@ -46,11 +58,24 @@
 				{
 					"command": "cppgenerator.addFolder",
 					"when": "view == cppgenerator && viewItem == folder"
+				},
+				{
+					"command": "cppgenerator.deleteFolder",
+					"when": "view == cppgenerator && viewItem == folder"
 				}
 			],
 			"view/title": [
 				{
+					"command": "cppgenerator.refresh",
+					"when": "view == cppgenerator",
+					"group": "navigation"
+				},
+				{
 					"command": "cppgenerator.addFolder",
+					"when": "view == cppgenerator && config.cppgenerator.workspaceStorageDirectory != ''"
+				},
+				{
+					"command": "cppgenerator.deleteFolder",
 					"when": "view == cppgenerator && config.cppgenerator.workspaceStorageDirectory != ''"
 				}
 			]

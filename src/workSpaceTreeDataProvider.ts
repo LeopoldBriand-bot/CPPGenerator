@@ -4,15 +4,10 @@ import * as path from 'path';
 import {TreeItem} from './workspaceTreeItem';
 
 export class TreeDataProvider implements vscode.TreeDataProvider<TreeItem> {
-    onDidChangeTreeData?: vscode.Event<any|null|undefined>|undefined;
-  
     data: TreeItem[];
-    private _onDidChangeTreeData: vscode.EventEmitter<unknown>;
-  
+    private _onDidChangeTreeData: vscode.EventEmitter<TreeItem | undefined | null | void> = new vscode.EventEmitter<TreeItem | undefined | null | void>();
+    readonly onDidChangeTreeData: vscode.Event<TreeItem | undefined | null | void> = this._onDidChangeTreeData.event;
     constructor(private workspaceRoot: string | undefined) {
-
-        this._onDidChangeTreeData = new vscode.EventEmitter();
-        this.onDidChangeTreeData = this._onDidChangeTreeData.event;
         if(this.workspaceRoot) {
             this.data = this.getFilesData(this.workspaceRoot);
         } else {
@@ -44,7 +39,7 @@ export class TreeDataProvider implements vscode.TreeDataProvider<TreeItem> {
         } else {
             this.data = [];
         }
-        this._onDidChangeTreeData.fire(null);
+        this._onDidChangeTreeData.fire();;
       }
 }
 
