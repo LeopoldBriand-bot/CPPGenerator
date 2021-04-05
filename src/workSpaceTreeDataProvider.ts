@@ -64,8 +64,9 @@ function dirTree(filename: string ) {
             const cppfileName = cppfile ? cppfile[1]+".cpp" : "";
             if (cppfile && fs.existsSync(cppfileName)) {
                 const matches = filename.match(/^\/(.+\/)*(.+)\.(.+)$/);
+                const fileLabel = /([a-zA-Z]*)(\.h$)/.exec(path.basename(filename));
                 let info : TreeItem = new TreeItem(
-                    path.basename(filename),
+                    fileLabel ? fileLabel[1] : "",
                     "file",
                     filename,
                     cppfileName,
