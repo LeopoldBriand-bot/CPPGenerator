@@ -1,0 +1,53 @@
+/**
+    <%=fileDescription%>
+    @file <%=className%>.cpp
+    @version <%=version%> <%=date%> 
+*/
+#include "<%=className%>.h"
+
+<% _.each(includes.cpp.libs, function(val){%>#include <<%-  val %>>
+<%})%>
+<% _.each(includes.cpp.locales, function(val){%>#include "<%-  val %>"
+<%})%>
+
+<% _.each(namespaces, function(val){%>using namespace <%-  val %>;
+<%})%>
+
+// ###################################################
+// Declarations
+// ###################################################
+
+<%=className%>::<%=className%>()
+{
+}
+
+<%=className%>::~<%=className%>()
+{
+}
+
+// ###################################################
+// Getters
+// ###################################################
+
+<% _.each(variables, function(variable) { %>
+<%- variable.type %> <%=className%>::<%- _.camelCase("get " + variable.name) %>() {
+    return <%- variable.name%>;
+}<% }) %>
+
+// ###################################################
+// Setters
+// ###################################################
+
+<% _.each(variables, function(variable) { %>
+void <%=className%>::<%- _.camelCase("set " + variable.name) %>(<%- variable.type %> <%- _.camelCase("new " + variable.name) %>){
+    <%- variable.name %> = <%- _.camelCase("new " + variable.name) %>;
+}<% }) %>
+
+// ###################################################
+// Methods
+// ###################################################
+
+<% _.each(methods, function(method) { %>
+<%- method.type %> <%=className%>::<%- method.name %>(<% _.each(method.args, function(arg, i) {%><%- arg.type %> <%- arg.name %><%method.args.lenght != i ? ", " : ""%><% })%>){
+    // write some code here
+}<% }) %>

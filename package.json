@@ -51,6 +51,10 @@
 			{
 				"command": "cppgenerator.deleteFolder",
 				"title": "Delete folder"
+			},
+			{
+				"command": "cppgenerator.createFiles",
+				"title": "Add files"
 			}
 		],
 		"menus": {
@@ -61,6 +65,10 @@
 				},
 				{
 					"command": "cppgenerator.deleteFolder",
+					"when": "view == cppgenerator && viewItem == folder"
+				},
+				{
+					"command": "cppgenerator.createFiles",
 					"when": "view == cppgenerator && viewItem == folder"
 				}
 			],
@@ -76,6 +84,10 @@
 				},
 				{
 					"command": "cppgenerator.deleteFolder",
+					"when": "view == cppgenerator && config.cppgenerator.workspaceStorageDirectory != ''"
+				},
+				{
+					"command": "cppgenerator.createFiles",
 					"when": "view == cppgenerator && config.cppgenerator.workspaceStorageDirectory != ''"
 				}
 			]
@@ -93,19 +105,24 @@
 		"test": "node ./out/test/runTest.js"
 	},
 	"devDependencies": {
-		"@types/vscode": "^1.54.0",
 		"@types/glob": "^7.1.3",
+		"@types/lodash": "^4.14.168",
 		"@types/mocha": "^8.0.4",
 		"@types/node": "^12.11.7",
-		"eslint": "^7.19.0",
+		"@types/vscode": "^1.54.0",
 		"@typescript-eslint/eslint-plugin": "^4.14.1",
 		"@typescript-eslint/parser": "^4.14.1",
+		"eslint": "^7.19.0",
 		"glob": "^7.1.6",
 		"mocha": "^8.2.1",
+		"ts-loader": "^8.0.14",
 		"typescript": "^4.1.3",
 		"vscode-test": "^1.5.0",
-		"ts-loader": "^8.0.14",
 		"webpack": "^5.19.0",
 		"webpack-cli": "^4.4.0"
+	},
+	"dependencies": {
+		"lodash": "^4.17.21",
+		"raw-loader": "^4.0.2"
 	}
 }

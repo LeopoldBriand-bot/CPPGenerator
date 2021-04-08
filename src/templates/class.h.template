@@ -1,0 +1,50 @@
+/**
+    <%=fileDescription%>
+    @file <%=className%>.h
+    @version <%=version%> <%=date%> 
+*/
+
+#ifndef <%= classDefinitionName %>
+#define <%= classDefinitionName %>
+
+<% _.each(includes.libs, function(val){%>#include <<%-  val %>><%})%>
+<% _.each(includes.locales, function(val){%>#include "<%-  val %>"<%})%>
+
+<% _.each(namespaces, function(val){%>using namespace <%-  val %>;<%})%>
+
+class <%= className %>
+{
+public:
+    // ###################################################
+    // Declarations
+    // ###################################################
+    <%= className %>();
+    ~<%= className %>();
+
+    // ###################################################
+    // Getters
+    // ###################################################
+    <% _.each(variables, function(variable) { %>
+    <%- variable.type %> <%- _.camelCase("get " + variable.name) %>();
+    <% }) %>
+
+    // ###################################################
+    // Setters
+    // ###################################################
+    <% _.each(variables, function(variable) { %>
+    void <%- _.camelCase("set " + variable.name) %>(<%- variable.type %> <%- variable.name %>);
+    <% }) %>
+
+    // ###################################################
+    // Methods
+    // ###################################################
+    <% _.each(methods, function(method) { %>
+    <%- method.type %> <%- method.name %>(<% _.each(method.args, function(arg, i) {%><%- arg.type %> <%- arg.name %><%method.args.lenght != i ? ", " : ""%><% })%>);
+    <% }) %>
+
+private:
+    <% _.each(variables, function(variable) { %>
+    <%- variable.type %> <%- variable.name %>;
+    <% }) %>
+};
+#endif

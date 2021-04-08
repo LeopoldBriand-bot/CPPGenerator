@@ -34,6 +34,11 @@ const config = {
             loader: 'ts-loader'
           }
         ]
+      },
+      { 
+        test: /\.template$/, 
+        use: 'raw-loader',
+        exclude: /node_modules/,
       }
     ]
   }
