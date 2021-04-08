@@ -55,6 +55,10 @@
 			{
 				"command": "cppgenerator.createFiles",
 				"title": "Add files"
+			},
+			{
+				"command": "cppgenerator.deleteFiles",
+				"title": "Delete files"
 			}
 		],
 		"menus": {
@@ -70,6 +74,10 @@
 				{
 					"command": "cppgenerator.createFiles",
 					"when": "view == cppgenerator && viewItem == folder"
+				},
+				{
+					"command": "cppgenerator.deleteFiles",
+					"when": "view == cppgenerator && viewItem == file"
 				}
 			],
 			"view/title": [
@@ -80,10 +88,6 @@
 				},
 				{
 					"command": "cppgenerator.addFolder",
-					"when": "view == cppgenerator && config.cppgenerator.workspaceStorageDirectory != ''"
-				},
-				{
-					"command": "cppgenerator.deleteFolder",
 					"when": "view == cppgenerator && config.cppgenerator.workspaceStorageDirectory != ''"
 				},
 				{
