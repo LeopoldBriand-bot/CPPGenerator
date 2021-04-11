@@ -19,8 +19,8 @@ export type DataType = {
         }
     },
     namespaces: String[],
-    variables: { name: String, type: String }[],
-    methods: { name: String, type: String, args: { name: String, type: String }[]}[]
+    variables: { name: String, type: String}[],
+    methods: { name: String, type: String, args: { name: String, type: String }[], content: String}[]
 };
 
 export function getTemplated(classType: String, data:DataType) {
@@ -39,5 +39,28 @@ export function getTemplated(classType: String, data:DataType) {
     } catch(e) {
         console.log(e);
         return {header: '', cpp: ''};
+    };
+}
+
+export function formatEmptyData(name: String) {
+    return {
+        fileDescription: '',
+        className: name,
+        classDefinitionName: `DEF_${name.toUpperCase()}`, 
+        version: '0.1.0', 
+        date: new Date(Date.now()).toLocaleDateString().toString(),
+        includes: {
+            header: {
+                libs: [],
+                locale: []
+            },
+            cpp: {
+                libs: [],
+                locale: []
+            }
+        },
+        namespaces: [],
+        variables: [],
+        methods: []
     };
 }

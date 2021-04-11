@@ -3,7 +3,7 @@ import * as fs from 'fs';
 import * as vscode from 'vscode';
 import { TreeDataProvider } from '../workSpaceTreeDataProvider';
 import { TreeItem } from '../workspaceTreeItem';
-import { getTemplated, DataType } from "../utils/templates";
+import { getTemplated, DataType, formatEmptyData } from "../utils/templates";
 
 // Prompts the user for a new folder name and then creates it.
 export const createFiles = async (context: TreeItem, treeDataProvider: TreeDataProvider) => {
@@ -52,26 +52,3 @@ export const createFiles = async (context: TreeItem, treeDataProvider: TreeDataP
   treeDataProvider.refresh();
 
 };
-
-function formatEmptyData(name: String) {
-    return {
-        fileDescription: '',
-        className: name,
-        classDefinitionName: `DEF_${name.toUpperCase()}`, 
-        version: '0.1.0', 
-        date: Date.now().toString(),
-        includes: {
-            header: {
-                libs: [],
-                locale: []
-            },
-            cpp: {
-                libs: [],
-                locale: []
-            }
-        },
-        namespaces: [],
-        variables: [],
-        methods: []
-    };
-}
