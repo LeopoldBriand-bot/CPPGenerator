@@ -1,4 +1,4 @@
-/**
+/** --File entry--
     <%=fileDescription%>
     @file <%=className%>.h
     @version <%=version%> <%=date%> 
@@ -44,7 +44,7 @@ public:
 
 private:
     <% _.each(variables, function(variable) { %>
-    <%- variable.type %> <%- variable.name %>;
-    <% }) %>
+    /** @name <%- variable.type %> @type <%- variable.name %> */
+    <%- variable.type %> <%- variable.name %>;<% }) %>
 };
 #endif

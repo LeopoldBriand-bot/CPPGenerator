@@ -6,6 +6,7 @@ import {addFolder} from './actions/addFolder.action';
 import { deleteFolder } from './actions/deleteFolder.action';
 import { createFiles } from './actions/createFiles.action';
 import { deleteFiles } from './actions/deleteFiles.action';
+import { editFiles } from './actions/editFiles.action';
 
 // this method is called when your extension is activated
 // your extension is activated the very first time the command is executed
@@ -62,6 +63,18 @@ export function activate(context: vscode.ExtensionContext) {
 		async (context) => {
 			try {
 			await deleteFiles(context, treeDataProvider);
+			} catch (err) {
+			vscode.window.showErrorMessage(err);
+			}
+		},
+	);
+
+	// Register edit files Command.
+	vscode.commands.registerCommand(
+		'cppgenerator.editFiles',
+		async (context) => {
+			try {
+			await editFiles(context, treeDataProvider);
 			} catch (err) {
 			vscode.window.showErrorMessage(err);
 			}

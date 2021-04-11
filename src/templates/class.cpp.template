@@ -1,4 +1,4 @@
-/**
+/** --File entry--
     <%=fileDescription%>
     @file <%=className%>.cpp
     @version <%=version%> <%=date%> 
@@ -30,6 +30,10 @@
 // ###################################################
 
 <% _.each(variables, function(variable) { %>
+/**
+* @name <%- _.camelCase("get " + variable.name) %>
+* @type <%- variable.type %>
+*/
 <%- variable.type %> <%=className%>::<%- _.camelCase("get " + variable.name) %>() {
     return <%- variable.name%>;
 }<% }) %>
@@ -39,6 +43,11 @@
 // ###################################################
 
 <% _.each(variables, function(variable) { %>
+/**
+* @name <%- _.camelCase("set " + variable.name) %>
+* @type void
+* @param {<%- variable.type %>} <%- _.camelCase("new " + variable.name) %>
+*/
 void <%=className%>::<%- _.camelCase("set " + variable.name) %>(<%- variable.type %> <%- _.camelCase("new " + variable.name) %>){
     <%- variable.name %> = <%- _.camelCase("new " + variable.name) %>;
 }<% }) %>
@@ -48,6 +57,12 @@ void <%=className%>::<%- _.camelCase("set " + variable.name) %>(<%- variable.typ
 // ###################################################
 
 <% _.each(methods, function(method) { %>
+/** --method--
+* @name <%- method.name %>
+* @type <%- method.type %>
+<% _.each(method.args, function(arg, i) {%>
+* @param {<%- arg.type %>} <%- arg.name %>
+<% })%>*/
 <%- method.type %> <%=className%>::<%- method.name %>(<% _.each(method.args, function(arg, i) {%><%- arg.type %> <%- arg.name %><%method.args.lenght != i ? ", " : ""%><% })%>){
-    // write some code here
+    <%- method.content %>
 }<% }) %>
