@@ -3,6 +3,8 @@
 'use strict';
 
 const path = require('path');
+// eslint-disable-next-line @typescript-eslint/naming-convention
+const { VueLoaderPlugin } = require('vue-loader');
 
 /**@type {import('webpack').Configuration}*/
 const config = {
@@ -22,7 +24,7 @@ const config = {
   },
   resolve: {
     // support reading TypeScript and JavaScript files, 📖 -> https://github.com/TypeStrong/ts-loader
-    extensions: ['.ts', '.js']
+    extensions: ['.ts', '.js', '.vue']
   },
   module: {
     rules: [
@@ -39,8 +41,17 @@ const config = {
         test: /\.template$/, 
         use: 'raw-loader',
         exclude: /node_modules/,
+      },
+      {
+        test: /\.vue$/,
+        loader: 'vue-loader'
       }
     ]
-  }
+  },
+  plugins: [
+    // make sure to include the plugin!
+    // @ts-ignore
+    new VueLoaderPlugin()
+  ]
 };
 module.exports = config;

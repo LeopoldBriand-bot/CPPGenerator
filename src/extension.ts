@@ -13,13 +13,14 @@ import { editFiles } from './actions/editFiles.action';
 export function activate(context: vscode.ExtensionContext) {
 	const treeDataProvider =  new TreeDataProvider(vscode.workspace.rootPath);
 	vscode.window.registerTreeDataProvider('cppgenerator', treeDataProvider);
+	let currentPanel: vscode.WebviewPanel | undefined = undefined;
+
 	vscode.commands.registerCommand(
 		'cppgenerator.refresh', 
 		async () => {
 			treeDataProvider.refresh();
 		}
 	);
-	
 
 	// Register Add sub-folder Command.
     vscode.commands.registerCommand(
